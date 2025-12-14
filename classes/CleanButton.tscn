@@ -1,28 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://bsulvmrttijpt"]
 
+[ext_resource type="StyleBox" uid="uid://coaatlbjypp87" path="res://assets/styles/clean_hovered.tres" id="1_y6oi7"]
+[ext_resource type="StyleBox" uid="uid://c32nu0if8la1b" path="res://assets/styles/clean_pressed.tres" id="2_i3lo5"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yk4h0"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yk4h0"]
-content_margin_left = 8.0
-content_margin_top = 2.0
-content_margin_right = 8.0
-content_margin_bottom = 2.0
-bg_color = Color(1, 1, 1, 0.129412)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nlstm"]
-content_margin_left = 8.0
-content_margin_top = 2.0
-content_margin_right = 8.0
-content_margin_bottom = 2.0
-bg_color = Color(0, 0, 0, 0.196078)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y6oi7"]
 content_margin_left = 8.0
@@ -36,7 +17,7 @@ offset_bottom = 23.0
 theme_override_colors/icon_pressed_color = Color(0.529412, 0.529412, 0.529412, 1)
 theme_override_colors/font_pressed_color = Color(0.529067, 0.529067, 0.529067, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_yk4h0")
-theme_override_styles/hover = SubResource("StyleBoxFlat_yk4h0")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_nlstm")
+theme_override_styles/hover = ExtResource("1_y6oi7")
+theme_override_styles/pressed = ExtResource("2_i3lo5")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_y6oi7")
 text = "Clean Button"

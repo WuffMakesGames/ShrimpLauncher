@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://dvc87flpy4kte"]
+[gd_scene load_steps=17 format=3 uid="uid://dvc87flpy4kte"]
 
 [ext_resource type="Script" uid="uid://lw2qnw5f5ua1" path="res://classes/category_item.gd" id="1_ovtgv"]
 [ext_resource type="Shader" uid="uid://cml2ev0fi5u5j" path="res://shaders/ItemHover.gdshader" id="2_bsg27"]
-[ext_resource type="Texture2D" uid="uid://ci1ifdfhrndd4" path="res://default.png" id="2_dx0u5"]
-[ext_resource type="FontFile" uid="uid://dyjx5ew3ptgpn" path="res://assets/fonts/Segoe UI.ttf" id="4_mnvh7"]
+[ext_resource type="Texture2D" uid="uid://ci1ifdfhrndd4" path="res://assets/images/default.png" id="2_dx0u5"]
+[ext_resource type="FontFile" uid="uid://dyjx5ew3ptgpn" path="res://assets/fonts/segoe/Segoe UI.ttf" id="4_mnvh7"]
+[ext_resource type="PackedScene" uid="uid://d2cvamdxuxanr" path="res://scenes/InstanceProperties.tscn" id="5_75i4n"]
 
 [sub_resource type="Gradient" id="Gradient_dx0u5"]
 interpolation_mode = 2
@@ -133,5 +134,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_xnysj")
 theme_override_styles/hover = SubResource("StyleBoxFlat_mnvh7")
 theme_override_styles/separator = SubResource("StyleBoxLine_mnvh7")
 
-[connection signal="file_selected" from="FileCover" to="." method="_on_file_cover_file_selected"]
+[node name="InstanceProperties" parent="." instance=ExtResource("5_75i4n")]
+visible = false
+
 [connection signal="id_pressed" from="PopupMenu" to="." method="_on_popup_menu_id_pressed"]

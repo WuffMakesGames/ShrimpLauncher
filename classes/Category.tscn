@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://djflhhgx0oip7" path="res://classes/category_label.gd" id="1_n6fhs"]
 [ext_resource type="Script" uid="uid://cbv0s0bgvydof" path="res://classes/category.gd" id="1_wpk3r"]
 [ext_resource type="Texture2D" uid="uid://bb7h6tj7kw5r4" path="res://assets/icons/chevron-down.svg" id="2_wpk3r"]
-[ext_resource type="FontFile" uid="uid://ct3a205v2m0dy" path="res://assets/fonts/Segoe UI Bold.ttf" id="3_m5m4e"]
+[ext_resource type="FontFile" uid="uid://ct3a205v2m0dy" path="res://assets/fonts/segoe/Segoe UI Bold.ttf" id="3_m5m4e"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wpk3r"]
 content_margin_left = 16.0

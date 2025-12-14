@@ -1,6 +1,9 @@
 extends Node
 signal updated
 
+const PATH_SETTINGS = "user://settings.cfg"
+const APP_TITLE = "Shrimp Launcher"
+
 # Export
 @export var Icons: Dictionary[String, Texture2D]
 
@@ -9,16 +12,15 @@ var settings: ConfigFile = ConfigFile.new()
 var instances: Array[AppInstance] = []
 var processes: Array[Dictionary] = []
 
-const PATH_SETTINGS = "user://settings.cfg"
-
 # Process
-func send_update(): call_deferred("emit_signal", "updated")
 func _ready() -> void:
 	load_settings()
 	load_instances()
 
 #region Settings
-func save_settings(): settings.save(PATH_SETTINGS)
+func save_settings():
+	settings.save(PATH_SETTINGS)
+
 func load_settings():
 	settings.load(PATH_SETTINGS)
 	
@@ -33,7 +35,11 @@ func load_settings():
 	save_settings()
 
 #endregion
+
 #region Instances
+## Sends a signal when instances are update
+func send_update(): call_deferred("emit_signal", "updated")
+
 ## Loads instances from a specified user directory
 func load_instances():
 	var dir = DirAccess.open(str(settings.get_value("user", "path"), "instances"))

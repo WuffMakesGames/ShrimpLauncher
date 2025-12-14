@@ -14,8 +14,9 @@ enum POPUP_ID {
 @export var overlay: PanelContainer
 
 # Variables
-@onready var appicon: TextureRect = $Icon
 @onready var popup: PopupMenu = $PopupMenu
+@onready var properties: Window = $InstanceProperties
+@onready var icon: TextureRect = $Icon
 
 var hover: float = 0.0
 var tween: Tween
@@ -24,7 +25,7 @@ var update_icon: bool = true
 
 # Process
 func _ready() -> void:
-	appicon.material = icon_material.duplicate()
+	icon.material = icon_material.duplicate()
 	popup.hide()
 	
 	# Signals
@@ -43,12 +44,12 @@ func _process(delta: float) -> void:
 	if update_icon:
 		instance.fetch_texture()
 		update_icon = false
-	appicon.texture = instance.texture
+	icon.texture = instance.texture
 	
 	# Animate item
-	appicon.pivot_offset = appicon.size/2
-	appicon.scale = Vector2(1+hover*0.05, 1+hover*0.05)
-	appicon.material.set_shader_parameter("hover", hover)
+	icon.pivot_offset = icon.size/2
+	icon.scale = Vector2(1+hover*0.05, 1+hover*0.05)
+	icon.material.set_shader_parameter("hover", hover)
 	overlay.modulate.a = hover
 
 func _gui_input(event: InputEvent) -> void:
@@ -115,4 +116,5 @@ func _on_file_cover_file_selected(path: String) -> void:
 	Global.save_instance(instance)
 
 func _on_popup_menu_id_pressed(id: int) -> void:
-	if id == POPUP_ID.COVER: $FileCover.show()
+	if id == POPUP_ID.PROPERTIES: $InstanceProperties.open(instance)
+	elif id == POPUP_ID.COVER: $FileCover.show()

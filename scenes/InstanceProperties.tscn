@@ -1,0 +1,213 @@
+[gd_scene load_steps=14 format=3 uid="uid://d2cvamdxuxanr"]
+
+[ext_resource type="FontFile" uid="uid://dyjx5ew3ptgpn" path="res://assets/fonts/segoe/Segoe UI.ttf" id="1_ew66b"]
+[ext_resource type="Script" uid="uid://cdejifc82tt3l" path="res://scenes/instance_properties.gd" id="1_xru25"]
+[ext_resource type="Texture2D" uid="uid://ci1ifdfhrndd4" path="res://assets/images/default.png" id="3_ew66b"]
+[ext_resource type="PackedScene" uid="uid://jqc6juhxwjlo" path="res://classes/CleanLineEdit.tscn" id="5_ew66b"]
+[ext_resource type="LabelSettings" uid="uid://cpuc6l08b55gs" path="res://assets/styles/label_dim.tres" id="6_0qu6e"]
+[ext_resource type="StyleBox" uid="uid://hrudqijvihgb" path="res://assets/styles/clean_outlined.tres" id="7_b1shn"]
+
+[sub_resource type="Theme" id="Theme_dufkc"]
+default_font = ExtResource("1_ew66b")
+default_font_size = 13
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ew66b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b1shn"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cp54f"]
+content_margin_left = 12.0
+content_margin_right = 12.0
+draw_center = false
+border_width_top = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ew66b"]
+content_margin_left = 12.0
+content_margin_right = 12.0
+bg_color = Color(0, 0, 0, 0.2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dufkc"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.255659, 0.255659, 0.255658, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ew66b"]
+color = Color(0.219501, 0.219501, 0.219501, 1)
+
+[node name="InstanceProperties" type="Window" node_paths=PackedStringArray("edit_title", "edit_group", "edit_program", "edit_args")]
+initial_position = 2
+size = Vector2i(600, 360)
+unresizable = true
+theme = SubResource("Theme_dufkc")
+script = ExtResource("1_xru25")
+edit_title = NodePath("TabContainer/General/VBoxContainer/Title/CleanLineEdit")
+edit_group = NodePath("TabContainer/General/VBoxContainer/Group/CleanLineEdit")
+edit_program = NodePath("TabContainer/Application/VBoxContainer/Program/CleanLineEdit")
+edit_args = NodePath("TabContainer/Application/VBoxContainer/Arguments/CleanLineEdit")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.101961, 0.101961, 0.101961, 1)
+
+[node name="TabContainer" type="TabContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/side_margin = 0
+theme_override_styles/tab_focus = SubResource("StyleBoxEmpty_ew66b")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_b1shn")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_cp54f")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_ew66b")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_ew66b")
+current_tab = 0
+
+[node name="General" type="PanelContainer" parent="TabContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dufkc")
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/General"]
+layout_mode = 2
+
+[node name="Title" type="HBoxContainer" parent="TabContainer/General/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="TabContainer/General/VBoxContainer/Title"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Title:"
+
+[node name="CleanLineEdit" parent="TabContainer/General/VBoxContainer/Title" instance=ExtResource("5_ew66b")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = ExtResource("7_b1shn")
+placeholder_text = ""
+
+[node name="Group" type="HBoxContainer" parent="TabContainer/General/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="TabContainer/General/VBoxContainer/Group"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Group:"
+
+[node name="CleanLineEdit" parent="TabContainer/General/VBoxContainer/Group" instance=ExtResource("5_ew66b")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = ExtResource("7_b1shn")
+placeholder_text = ""
+
+[node name="HSeparator" type="HSeparator" parent="TabContainer/General/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_ew66b")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/General/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/General/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="TabContainer/General/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+texture = ExtResource("3_ew66b")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="TabContainer/General/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Change app icon"
+label_settings = ExtResource("6_0qu6e")
+horizontal_alignment = 1
+
+[node name="Application" type="PanelContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dufkc")
+metadata/_tab_index = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Application"]
+layout_mode = 2
+
+[node name="Program" type="HBoxContainer" parent="TabContainer/Application/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="TabContainer/Application/VBoxContainer/Program"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Program:"
+
+[node name="CleanLineEdit" parent="TabContainer/Application/VBoxContainer/Program" instance=ExtResource("5_ew66b")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = ExtResource("7_b1shn")
+placeholder_text = ""
+
+[node name="Arguments" type="HBoxContainer" parent="TabContainer/Application/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="TabContainer/Application/VBoxContainer/Arguments"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Arguments:"
+
+[node name="CleanLineEdit" parent="TabContainer/Application/VBoxContainer/Arguments" instance=ExtResource("5_ew66b")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = ExtResource("7_b1shn")
+placeholder_text = ""
+
+[node name="HSeparator" type="HSeparator" parent="TabContainer/Application/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_ew66b")
+
+[node name="Label" type="Label" parent="TabContainer/Application/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "Arguments should be separated by commas, and formatted like so:
+-launch,File Name,-color,red"
+label_settings = ExtResource("6_0qu6e")
+horizontal_alignment = 1
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
