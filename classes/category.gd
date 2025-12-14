@@ -10,7 +10,7 @@ func _process(delta: float) -> void:
 	$Label/Label.text = name
 
 # Methods
-func add_instance(instance: ConfigFile):
+func add_instance(instance: AppInstance):
 	var node = instance_node.instantiate()
 	node.set_deferred("instance", instance)
 	list.add_child(node)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dg7k23nqwa85"]
+[gd_scene load_steps=13 format=3 uid="uid://dg7k23nqwa85"]
 
 [ext_resource type="Script" uid="uid://3e058vh0qeea" path="res://globals/global.gd" id="1_amtg0"]
 [ext_resource type="Texture2D" uid="uid://is80yujspb8m" path="res://assets/icons/adjustments.svg" id="2_maib6"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://bmt588a6brg6j" path="res://assets/icons/pencil.svg" id="8_nbh74"]
 [ext_resource type="Texture2D" uid="uid://bra3onvfprvim" path="res://assets/icons/trash.svg" id="9_fqldu"]
 [ext_resource type="Texture2D" uid="uid://diajxinmvmvj6" path="res://assets/icons/copy.svg" id="10_a5gvr"]
+[ext_resource type="Texture2D" uid="uid://batbmshtgm0vn" path="res://assets/icons/square-x.svg" id="11_a5gvr"]
+[ext_resource type="Texture2D" uid="uid://jno7dqe6sem" path="res://assets/icons/x.svg" id="12_orre8"]
 
 [node name="Global" type="Node"]
 script = ExtResource("1_amtg0")
@@ -17,10 +19,12 @@ Icons = Dictionary[String, Texture2D]({
 "adjustments": ExtResource("2_maib6"),
 "cancel": ExtResource("3_mk104"),
 "copy": ExtResource("10_a5gvr"),
+"kill": ExtResource("11_a5gvr"),
 "paint": ExtResource("7_nbh74"),
 "palette": ExtResource("6_4iw8w"),
 "pencil": ExtResource("8_nbh74"),
 "play": ExtResource("4_4iw8w"),
 "tags": ExtResource("5_nbh74"),
-"trash": ExtResource("9_fqldu")
+"trash": ExtResource("9_fqldu"),
+"x": ExtResource("12_orre8")
 })

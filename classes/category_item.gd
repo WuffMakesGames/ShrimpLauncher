@@ -18,7 +18,7 @@ enum POPUP_ID {
 
 var hover: float = 0.0
 var tween: Tween
-var instance: ConfigFile
+var instance: AppInstance
 var update_icon: bool = true
 
 # Process
@@ -33,24 +33,15 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
 	
-	# Values
-	var title = instance.get_value("main", "title")
-	var time = instance.get_value("main", "playtime", 0)
-	var icon = instance.get_value("main", "icon", "res://default.png")
-	
-	# Process playtime
-	if time < 60: time = str(int(time), " min")
-	else: time = str(String.num(time/60, 1) if floor(time/60) < time/60 else int(time/60), "hrs")
-	
 	# Set labels
-	label_title.text = title
-	label_time.text = time
+	label_title.text = instance.title
+	label_time.text = instance.get_time_formatted()
 	
 	# Set icon
-	if update_icon and FileAccess.file_exists(icon):
-		var texture = Loader.load(icon)
-		if texture is Texture2D: appicon.texture = texture
+	if update_icon:
+		instance.fetch_texture()
 		update_icon = false
+	appicon.texture = instance.texture
 	
 	# Animate item
 	appicon.pivot_offset = appicon.size/2
@@ -62,7 +53,7 @@ func _gui_input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton: return
 	if event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed: grab_focus()
-		if event.double_click: Global.launch_instance(instance)
+		if event.double_click: instance.launch()
 	elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 		open_popup()
 
@@ -71,7 +62,7 @@ func open_popup():
 	popup.clear()
 	
 	# Create items
-	popup.add_icon_item(Loader.load_image(instance.get_value("run", "path")), label_title.text, 100)
+	popup.add_icon_item(instance.texture, label_title.text, 100)
 	popup.set_item_disabled(popup.get_item_index(100), true)
 	
 	popup.add_separator("")
@@ -82,8 +73,9 @@ func open_popup():
 	popup.add_separator("")
 	
 	popup.add_icon_item(Global.Icons.play, "Launch", POPUP_ID.LAUNCH)
-	popup.add_icon_item(Global.Icons.cancel, "Stop", POPUP_ID.STOP)
-	popup.set_item_disabled(popup.get_item_index(POPUP_ID.STOP), true)
+	popup.add_icon_item(Global.Icons.x, "Stop", POPUP_ID.STOP)
+	popup.set_item_disabled(popup.get_item_index(POPUP_ID.LAUNCH), instance.is_running())
+	popup.set_item_disabled(popup.get_item_index(POPUP_ID.STOP), not instance.is_running())
 	
 	popup.add_separator("")
 	

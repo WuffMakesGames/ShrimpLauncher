@@ -33,14 +33,14 @@ vec2 invBilinear( in vec2 p, in vec2 a, in vec2 b, in vec2 c, in vec2 d ) {
 		float ik2 = 0.5/k2;
 		float v = (-k1 - w)*ik2;
 		float u = (h.x - f.x*v)/(e.x + g.x*v);
-		
+
 		if( u<0.0 || u>1.0 || v<0.0 || v>1.0 ) {
 		v = (-k1 + w)*ik2;
 		   u = (h.x - f.x*v)/(e.x + g.x*v);
 		}
 		res = vec2( u, 1.0 - v );
 	}
-	
+
 	return res;
 }
 
@@ -52,7 +52,7 @@ void fragment(){
 	vec2 bottomleftUV =vec2(0.0,1.0)+ bottomleft / vec2(textureSize(TEXTURE,0));
 
 	vec2 newUV = invBilinear(UV, topleftUV, toprightUV, bottomrightUV, bottomleftUV);
-	
+
 	if (topleft.x == 0.0 || topright.x == 0.0) {
 		COLOR = texture(SCREEN_TEXTURE, UV);
 	}

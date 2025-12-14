@@ -15,8 +15,8 @@ func _update():
 	
 	# Create groups and add instances
 	var cache = {}
-	for instance: ConfigFile in Global.instances:
-		var groupname = instance.get_value("main", "group", "")
+	for instance: AppInstance in Global.instances:
+		var groupname = instance.groupname
 		if groupname == "": groupname = "Unsorted"
 		
 		# Create group
