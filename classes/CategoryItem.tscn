@@ -68,7 +68,7 @@ color = Color(0.18359, 0.18359, 0.18359, 1)
 grow_begin = -4.0
 grow_end = -4.0
 
-[node name="CategoryItem" type="PanelContainer" node_paths=PackedStringArray("label_title", "label_time")]
+[node name="CategoryItem" type="PanelContainer" node_paths=PackedStringArray("label_title", "label_time", "overlay")]
 custom_minimum_size = Vector2(170, 0)
 offset_right = 170.0
 offset_bottom = 255.0
@@ -77,6 +77,7 @@ script = ExtResource("1_ovtgv")
 icon_material = SubResource("ShaderMaterial_dx0u5")
 label_title = NodePath("Icon/Overlay/HBoxContainer/Title")
 label_time = NodePath("Icon/Overlay/HBoxContainer/Playtime")
+overlay = NodePath("Icon/Overlay")
 
 [node name="Icon" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_bsg27")
@@ -88,10 +89,9 @@ stretch_mode = 5
 metadata/_edit_use_anchors_ = true
 
 [node name="Overlay" type="PanelContainer" parent="Icon"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+layout_mode = 2
+offset_right = 170.0
+offset_bottom = 255.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2

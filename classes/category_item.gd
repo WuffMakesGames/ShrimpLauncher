@@ -3,17 +3,18 @@ extends PanelContainer
 enum POPUP_ID {
 	RENAME=0, COVER=1,
 	LAUNCH=10, STOP=11,
-	PROPERTIES=20, GROUP=21, COPY=22, DELETE=23
+	PROPERTIES=20, GROUP=21, COPY=22, DELETE=23,
+	AWARD=30,
 }
 
 # Export
 @export var icon_material: ShaderMaterial
 @export var label_title: RichTextLabel
 @export var label_time: RichTextLabel
+@export var overlay: PanelContainer
 
 # Variables
 @onready var appicon: TextureRect = $Icon
-@onready var overlay: PanelContainer = $Icon/Overlay
 @onready var popup: PopupMenu = $PopupMenu
 
 var hover: float = 0.0
@@ -32,6 +33,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
+	if not instance: return
 	
 	# Set labels
 	label_title.text = instance.title
@@ -63,7 +65,6 @@ func open_popup():
 	
 	# Create items
 	popup.add_icon_item(instance.texture, label_title.text, 100)
-	popup.set_item_disabled(popup.get_item_index(100), true)
 	
 	popup.add_separator("")
 	
@@ -74,15 +75,20 @@ func open_popup():
 	
 	popup.add_icon_item(Global.Icons.play, "Launch", POPUP_ID.LAUNCH)
 	popup.add_icon_item(Global.Icons.x, "Stop", POPUP_ID.STOP)
-	popup.set_item_disabled(popup.get_item_index(POPUP_ID.LAUNCH), instance.is_running())
-	popup.set_item_disabled(popup.get_item_index(POPUP_ID.STOP), not instance.is_running())
 	
 	popup.add_separator("")
 	
 	popup.add_icon_item(Global.Icons.adjustments, "Properties", POPUP_ID.PROPERTIES)
 	popup.add_icon_item(Global.Icons.tags, "Change Group", POPUP_ID.GROUP)
+	popup.add_icon_item(Global.Icons.award, "Achievements", POPUP_ID.AWARD)
 	popup.add_icon_item(Global.Icons.copy, "Copy", POPUP_ID.COPY)
 	popup.add_icon_item(Global.Icons.trash, "Delete", POPUP_ID.DELETE)
+	
+	# Disable items
+	popup.set_item_disabled(popup.get_item_index(100), true)
+	popup.set_item_disabled(popup.get_item_index(POPUP_ID.LAUNCH), instance.is_running())
+	popup.set_item_disabled(popup.get_item_index(POPUP_ID.STOP), not instance.is_running())
+	popup.set_item_disabled(popup.get_item_index(POPUP_ID.AWARD), instance.steam_appid == 0)
 	
 	# Show popup
 	var viewport = get_viewport_rect()
