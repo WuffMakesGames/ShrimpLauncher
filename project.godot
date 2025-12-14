@@ -1,0 +1,56 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Shrimp Launcher"
+run/main_scene="uid://cpedyff3wu6c6"
+config/features=PackedStringArray("4.4", "GL Compatibility")
+config/icon="uid://c8jiklvx6eb3p"
+
+[autoload]
+
+Global="*res://globals/Global.tscn"
+uuid="*res://addons/uuid/uuid.gd"
+
+[debug]
+
+file_logging/enable_file_logging=true
+
+[display]
+
+window/size/viewport_width=965
+window/size/viewport_height=700
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/SmoothScroll/plugin.cfg", "res://addons/icon_explorer/plugin.cfg", "res://addons/native_dialogs/plugin.cfg", "res://addons/uuid/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://assets/": "red",
+"res://classes/": "orange",
+"res://globals/": "gray",
+"res://scenes/": "teal",
+"res://shaders/": "pink"
+}
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+
+[steam]
+
+initialization/app_id=0
+initialization/initialize_on_startup=false
+initialization/embed_callbacks=false
+multiplayer_peer/max_channels=4

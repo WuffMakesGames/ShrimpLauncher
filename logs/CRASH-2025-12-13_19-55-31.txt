@@ -1,0 +1,5 @@
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Allumeria.Rendering.Drawing.Init()
+   at Allumeria.Game.OnLoad()
+   at OpenTK.Windowing.Desktop.GameWindow.Run()
+   at Allumeria.Program.Main(String[] args)

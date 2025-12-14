@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0r7t7r2ei5u2"]
+
+[ext_resource type="Script" uid="uid://djflhhgx0oip7" path="res://classes/category_label.gd" id="1_n6fhs"]
+[ext_resource type="Script" uid="uid://cbv0s0bgvydof" path="res://classes/category.gd" id="1_wpk3r"]
+[ext_resource type="Texture2D" uid="uid://bb7h6tj7kw5r4" path="res://assets/icons/chevron-down.svg" id="2_wpk3r"]
+[ext_resource type="FontFile" uid="uid://ct3a205v2m0dy" path="res://assets/fonts/Segoe UI Bold.ttf" id="3_m5m4e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wpk3r"]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+
+[node name="Category" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wpk3r")
+
+[node name="Label" type="HBoxContainer" parent="."]
+modulate = Color(0.646029, 0.646029, 0.646029, 1)
+layout_mode = 2
+script = ExtResource("1_n6fhs")
+
+[node name="Icon" type="TextureRect" parent="Label"]
+layout_mode = 2
+texture = ExtResource("2_wpk3r")
+
+[node name="Label" type="RichTextLabel" parent="Label"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("3_m5m4e")
+text = "Category"
+fit_content = true
+autowrap_mode = 0
+
+[node name="HSeparator" type="HSeparator" parent="Label"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_wpk3r")
+
+[node name="Items" type="HFlowContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+
+[connection signal="closed" from="Label" to="." method="_on_label_closed"]
+[connection signal="opened" from="Label" to="." method="_on_label_opened"]

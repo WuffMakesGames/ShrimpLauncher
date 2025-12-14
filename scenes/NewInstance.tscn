@@ -1,0 +1,107 @@
+[gd_scene load_steps=9 format=3 uid="uid://uv1p6o4to85b"]
+
+[ext_resource type="Script" uid="uid://bxli26iwajtkg" path="res://scenes/new_instance.gd" id="1_0r7kl"]
+[ext_resource type="Texture2D" uid="uid://ci1ifdfhrndd4" path="res://default.png" id="1_kq1x7"]
+[ext_resource type="FontFile" uid="uid://dyjx5ew3ptgpn" path="res://assets/fonts/Segoe UI.ttf" id="2_d4x85"]
+[ext_resource type="PackedScene" uid="uid://jqc6juhxwjlo" path="res://classes/CleanLineEdit.tscn" id="4_hfp00"]
+[ext_resource type="PackedScene" uid="uid://bsulvmrttijpt" path="res://classes/CleanButton.tscn" id="5_ojwha"]
+[ext_resource type="Texture2D" uid="uid://euf08n5durjx" path="res://assets/icons/folder-open.svg" id="6_4m0ye"]
+
+[sub_resource type="Theme" id="Theme_hfp00"]
+default_font = ExtResource("2_d4x85")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kq1x7"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+
+[node name="NewInstance" type="Window"]
+auto_translate_mode = 1
+title = "Shrimp Launcher - New Instance"
+initial_position = 2
+size = Vector2i(600, 200)
+script = ExtResource("1_0r7kl")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_hfp00")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_kq1x7")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_kq1x7")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Name" type="HBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer/Name"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Name:"
+
+[node name="CleanLineEdit" parent="PanelContainer/HBoxContainer/VBoxContainer/Name" instance=ExtResource("4_hfp00")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+placeholder_text = "New Instance"
+
+[node name="Group" type="HBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer/Group"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Group:"
+
+[node name="CleanLineEdit" parent="PanelContainer/HBoxContainer/VBoxContainer/Group" instance=ExtResource("4_hfp00")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+placeholder_text = "Unsorted"
+
+[node name="File" type="HBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer/File"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Path:"
+
+[node name="CleanLineEdit" parent="PanelContainer/HBoxContainer/VBoxContainer/File" instance=ExtResource("4_hfp00")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+placeholder_text = "path.exe"
+
+[node name="CleanButton" parent="PanelContainer/HBoxContainer/VBoxContainer/File" instance=ExtResource("5_ojwha")]
+layout_mode = 2
+text = ""
+icon = ExtResource("6_4m0ye")
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]

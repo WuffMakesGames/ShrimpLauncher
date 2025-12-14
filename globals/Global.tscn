@@ -1,0 +1,26 @@
+[gd_scene load_steps=11 format=3 uid="uid://dg7k23nqwa85"]
+
+[ext_resource type="Script" uid="uid://3e058vh0qeea" path="res://globals/global.gd" id="1_amtg0"]
+[ext_resource type="Texture2D" uid="uid://is80yujspb8m" path="res://assets/icons/adjustments.svg" id="2_maib6"]
+[ext_resource type="Texture2D" uid="uid://cuekvs4wik6np" path="res://assets/icons/cancel.svg" id="3_mk104"]
+[ext_resource type="Texture2D" uid="uid://cnxesaukei8v" path="res://assets/icons/player-play.svg" id="4_4iw8w"]
+[ext_resource type="Texture2D" uid="uid://cwa8jkk23ig52" path="res://assets/icons/tags.svg" id="5_nbh74"]
+[ext_resource type="Texture2D" uid="uid://idjw3vt3kmbl" path="res://assets/icons/palette.svg" id="6_4iw8w"]
+[ext_resource type="Texture2D" uid="uid://dqnfd6ctxrlnq" path="res://assets/icons/paint.svg" id="7_nbh74"]
+[ext_resource type="Texture2D" uid="uid://bmt588a6brg6j" path="res://assets/icons/pencil.svg" id="8_nbh74"]
+[ext_resource type="Texture2D" uid="uid://bra3onvfprvim" path="res://assets/icons/trash.svg" id="9_fqldu"]
+[ext_resource type="Texture2D" uid="uid://diajxinmvmvj6" path="res://assets/icons/copy.svg" id="10_a5gvr"]
+
+[node name="Global" type="Node"]
+script = ExtResource("1_amtg0")
+Icons = Dictionary[String, Texture2D]({
+"adjustments": ExtResource("2_maib6"),
+"cancel": ExtResource("3_mk104"),
+"copy": ExtResource("10_a5gvr"),
+"paint": ExtResource("7_nbh74"),
+"palette": ExtResource("6_4iw8w"),
+"pencil": ExtResource("8_nbh74"),
+"play": ExtResource("4_4iw8w"),
+"tags": ExtResource("5_nbh74"),
+"trash": ExtResource("9_fqldu")
+})

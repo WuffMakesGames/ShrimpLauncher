@@ -1,0 +1,137 @@
+[gd_scene load_steps=16 format=3 uid="uid://dvc87flpy4kte"]
+
+[ext_resource type="Script" uid="uid://lw2qnw5f5ua1" path="res://classes/category_item.gd" id="1_ovtgv"]
+[ext_resource type="Shader" uid="uid://cml2ev0fi5u5j" path="res://shaders/ItemHover.gdshader" id="2_bsg27"]
+[ext_resource type="Texture2D" uid="uid://ci1ifdfhrndd4" path="res://default.png" id="2_dx0u5"]
+[ext_resource type="FontFile" uid="uid://dyjx5ew3ptgpn" path="res://assets/fonts/Segoe UI.ttf" id="4_mnvh7"]
+
+[sub_resource type="Gradient" id="Gradient_dx0u5"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.241509, 0.913208)
+colors = PackedColorArray(0.144063, 0.144063, 0.144063, 1, 0.838897, 0.838897, 0.838897, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_75i4n"]
+gradient = SubResource("Gradient_dx0u5")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dx0u5"]
+shader = ExtResource("2_bsg27")
+shader_parameter/hover = 1.0
+shader_parameter/gradient = SubResource("GradientTexture2D_75i4n")
+
+[sub_resource type="Gradient" id="Gradient_bsg27"]
+offsets = PackedFloat32Array(0, 0.950943)
+colors = PackedColorArray(0.0846899, 0.0846899, 0.0846899, 1, 0.886262, 0.886261, 0.886262, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dx0u5"]
+gradient = SubResource("Gradient_bsg27")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bsg27"]
+shader = ExtResource("2_bsg27")
+shader_parameter/hover = 0.0
+shader_parameter/gradient = SubResource("GradientTexture2D_dx0u5")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dx0u5"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+
+[sub_resource type="Theme" id="Theme_orjtu"]
+default_font = ExtResource("4_mnvh7")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xnysj"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.122252, 0.122252, 0.122252, 1)
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 0.341176)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mnvh7"]
+bg_color = Color(0, 0, 0, 0.305882)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_mnvh7"]
+color = Color(0.18359, 0.18359, 0.18359, 1)
+grow_begin = -4.0
+grow_end = -4.0
+
+[node name="CategoryItem" type="PanelContainer" node_paths=PackedStringArray("label_title", "label_time")]
+custom_minimum_size = Vector2(170, 0)
+offset_right = 170.0
+offset_bottom = 255.0
+focus_mode = 2
+script = ExtResource("1_ovtgv")
+icon_material = SubResource("ShaderMaterial_dx0u5")
+label_title = NodePath("Icon/Overlay/HBoxContainer/Title")
+label_time = NodePath("Icon/Overlay/HBoxContainer/Playtime")
+
+[node name="Icon" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_bsg27")
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_dx0u5")
+expand_mode = 5
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="Overlay" type="PanelContainer" parent="Icon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_dx0u5")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Icon/Overlay"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Title" type="RichTextLabel" parent="Icon/Overlay/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+mouse_filter = 2
+text = "Title"
+fit_content = true
+scroll_active = false
+
+[node name="Playtime" type="RichTextLabel" parent="Icon/Overlay/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+text = "Playtime"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="FileCover" type="NativeFileDialog" parent="."]
+title = "Open a File"
+file_mode = 0
+filters = PackedStringArray("png", "jpg", "bmp")
+
+[node name="PopupMenu" type="PopupMenu" parent="."]
+size = Vector2i(176, 148)
+theme = SubResource("Theme_orjtu")
+theme_override_colors/font_disabled_color = Color(0.485703, 0.485704, 0.485703, 1)
+theme_override_constants/icon_max_width = 16
+theme_override_styles/panel = SubResource("StyleBoxFlat_xnysj")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mnvh7")
+theme_override_styles/separator = SubResource("StyleBoxLine_mnvh7")
+
+[connection signal="file_selected" from="FileCover" to="." method="_on_file_cover_file_selected"]
+[connection signal="id_pressed" from="PopupMenu" to="." method="_on_popup_menu_id_pressed"]
