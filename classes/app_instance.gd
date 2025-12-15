@@ -4,8 +4,10 @@ class_name AppInstance extends Node
 var title: String = ""
 var groupname: String = ""
 var icon_path: String = ""
+var notes: String = ""
 
 var playtime: float = 0
+var launches: int = 0
 var identifier: String = ""
 var steam_appid: int = 0
 
@@ -18,10 +20,15 @@ var was_running: bool = false
 var save_timer: float = 30
 var proc_id: int
 
+var is_dragged: bool = false
+var scale: float = 1.0
+var tween: Tween
+
 # Process
 func _process(delta: float) -> void:
 	if was_running and not is_running(): save_config()
-
+	if is_dragged and get_viewport().gui_get_drag_data() != self: dropped()
+	
 	# Check state
 	was_running = is_running()
 	if not is_running(): return
@@ -69,6 +76,8 @@ func _init(app_title, app_group, app_icon, app_path) -> void:
 func launch() -> void:
 	if OS.is_process_running(proc_id): return
 	proc_id = OS.create_process(path, args.split(","))
+	if proc_id != -1: launches += 1
+	save_config()
 
 func is_running() -> bool:
 	return OS.is_process_running(proc_id)
@@ -85,6 +94,19 @@ func get_time_formatted() -> String:
 	if playtime < 60: return str(int(playtime), " min")
 	return str(String.num(playtime/60, 1) if floor(playtime/60) < playtime/60 else int(playtime/60), " hrs")
 
+func dragged():
+	pass
+	#if tween: tween.kill()
+	#scale = 0.0
+	#is_dragged = true
+
+func dropped():
+	pass
+	#if tween: tween.kill()
+	#tween = create_tween()
+	#tween.set_ease(Tween.EASE_OUT)
+	#tween.tween_property(self, "scale", 1.0, 0.1)
+
 #endregion
 
 #region File system
@@ -96,9 +118,13 @@ func save_config():
 	config.set_value("main", "title", title)
 	config.set_value("main", "group", groupname)
 	config.set_value("main", "icon", icon_path)
-	config.set_value("main", "playtime", playtime)
 	config.set_value("main", "steam_appid", steam_appid)
 	config.set_value("main", "uid", identifier)
+	
+	# User
+	config.set_value("user", "playtime", playtime)
+	config.set_value("user", "launches", launches)
+	config.set_value("user", "notes", notes)
 	
 	# Run
 	config.set_value("run", "path", path)
@@ -116,9 +142,13 @@ func load_config(file: String) -> void:
 	title 		= config.get_value("main", "title", "Untitled")
 	groupname 	= config.get_value("main", "group", "")
 	icon_path 	= config.get_value("main", "icon", "")
-	playtime 	= config.get_value("main", "playtime", 0)
 	identifier 	= config.get_value("main", "uid", uuid.v4())
 	steam_appid = config.get_value("main", "steam_appid", 0)
+	
+	# User
+	playtime 	= config.get_value("user", "playtime", 0)
+	launches 	= config.get_value("user", "launches", 0)
+	notes 		= config.get_value("user", "notes", "")
 	
 	# Run
 	path = config.get_value("run", "path")

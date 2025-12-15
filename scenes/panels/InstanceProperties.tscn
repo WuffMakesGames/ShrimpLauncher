@@ -1,0 +1,239 @@
+[gd_scene load_steps=17 format=3 uid="uid://d2cvamdxuxanr"]
+
+[ext_resource type="FontFile" uid="uid://dyjx5ew3ptgpn" path="res://assets/fonts/segoe/Segoe UI.ttf" id="1_ol5x6"]
+[ext_resource type="Script" uid="uid://cdejifc82tt3l" path="res://scenes/panels/instance_properties.gd" id="2_gx8uw"]
+[ext_resource type="PackedScene" uid="uid://jqc6juhxwjlo" path="res://classes/ui_elements/CleanLineEdit.tscn" id="3_jegt5"]
+[ext_resource type="PackedScene" uid="uid://lkswx4kktywo" path="res://classes/ui_elements/CleanTextEdit.tscn" id="4_dnlbg"]
+[ext_resource type="LabelSettings" uid="uid://cpuc6l08b55gs" path="res://assets/styles/label_dim.tres" id="5_5mxr0"]
+[ext_resource type="PackedScene" uid="uid://clt0mixg6oydl" path="res://classes/ui_elements/CleanOutlineButton.tscn" id="6_dnlbg"]
+[ext_resource type="Texture2D" uid="uid://dq2wxxbqyir8w" path="res://assets/icons/check.svg" id="7_5mxr0"]
+[ext_resource type="Texture2D" uid="uid://cuekvs4wik6np" path="res://assets/icons/cancel.svg" id="8_gvl1e"]
+
+[sub_resource type="Theme" id="Theme_dufkc"]
+default_font = ExtResource("1_ol5x6")
+default_font_size = 13
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ew66b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b1shn"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cp54f"]
+content_margin_left = 12.0
+content_margin_right = 12.0
+draw_center = false
+border_width_top = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ew66b"]
+content_margin_left = 12.0
+content_margin_right = 12.0
+bg_color = Color(0, 0, 0, 0.2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dufkc"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.255659, 0.255659, 0.255658, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ew66b"]
+color = Color(0.219501, 0.219501, 0.219501, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qry5q"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+
+[node name="InstanceProperties" type="Window" node_paths=PackedStringArray("edit_title", "edit_group", "edit_notes", "edit_program", "edit_args", "playtime")]
+initial_position = 2
+size = Vector2i(600, 400)
+theme = SubResource("Theme_dufkc")
+script = ExtResource("2_gx8uw")
+edit_title = NodePath("VBoxContainer/TabContainer/General/VBoxContainer/Title/CleanLineEdit")
+edit_group = NodePath("VBoxContainer/TabContainer/General/VBoxContainer/Group/CleanLineEdit")
+edit_notes = NodePath("VBoxContainer/TabContainer/General/VBoxContainer/Notes/CleanTextEdit")
+edit_program = NodePath("VBoxContainer/TabContainer/Application/VBoxContainer/Program/CleanLineEdit")
+edit_args = NodePath("VBoxContainer/TabContainer/Application/VBoxContainer/Arguments/CleanLineEdit")
+playtime = NodePath("VBoxContainer/PanelContainer/Playtime")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.101961, 0.101961, 0.101961, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/side_margin = 0
+theme_override_styles/tab_focus = SubResource("StyleBoxEmpty_ew66b")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_b1shn")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_cp54f")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_ew66b")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_ew66b")
+current_tab = 0
+
+[node name="General" type="PanelContainer" parent="VBoxContainer/TabContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dufkc")
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/General"]
+layout_mode = 2
+
+[node name="Title" type="HBoxContainer" parent="VBoxContainer/TabContainer/General/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/General/VBoxContainer/Title"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Title:"
+
+[node name="CleanLineEdit" parent="VBoxContainer/TabContainer/General/VBoxContainer/Title" instance=ExtResource("3_jegt5")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Group" type="HBoxContainer" parent="VBoxContainer/TabContainer/General/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/General/VBoxContainer/Group"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Group:"
+
+[node name="CleanLineEdit" parent="VBoxContainer/TabContainer/General/VBoxContainer/Group" instance=ExtResource("3_jegt5")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/TabContainer/General/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_ew66b")
+
+[node name="Notes" type="VBoxContainer" parent="VBoxContainer/TabContainer/General/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/General/VBoxContainer/Notes"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Notes:"
+horizontal_alignment = 1
+
+[node name="CleanTextEdit" parent="VBoxContainer/TabContainer/General/VBoxContainer/Notes" instance=ExtResource("4_dnlbg")]
+layout_mode = 2
+
+[node name="Application" type="PanelContainer" parent="VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dufkc")
+metadata/_tab_index = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Application"]
+layout_mode = 2
+
+[node name="Program" type="HBoxContainer" parent="VBoxContainer/TabContainer/Application/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Application/VBoxContainer/Program"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Program:"
+
+[node name="CleanLineEdit" parent="VBoxContainer/TabContainer/Application/VBoxContainer/Program" instance=ExtResource("3_jegt5")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Arguments" type="HBoxContainer" parent="VBoxContainer/TabContainer/Application/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Application/VBoxContainer/Arguments"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Arguments:"
+
+[node name="CleanLineEdit" parent="VBoxContainer/TabContainer/Application/VBoxContainer/Arguments" instance=ExtResource("3_jegt5")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/TabContainer/Application/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_ew66b")
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Application/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "Arguments should be separated by commas, and formatted like so:
+-launch,File Name,-color,red"
+label_settings = ExtResource("5_5mxr0")
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxEmpty_qry5q")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="Apply" parent="VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource("6_dnlbg")]
+layout_mode = 2
+text = "Apply"
+icon = ExtResource("7_5mxr0")
+
+[node name="Cancel" parent="VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource("6_dnlbg")]
+layout_mode = 2
+text = "Cancel"
+icon = ExtResource("8_gvl1e")
+
+[node name="Playtime" type="Label" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Time Played: 0 min - Launched 0 times"
+label_settings = ExtResource("5_5mxr0")
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="tab_changed" from="VBoxContainer/TabContainer" to="." method="_on_tab_container_tab_changed"]

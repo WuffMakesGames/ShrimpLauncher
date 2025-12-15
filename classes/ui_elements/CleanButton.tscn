@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bsulvmrttijpt"]
 
-[ext_resource type="StyleBox" uid="uid://coaatlbjypp87" path="res://assets/styles/clean_hovered.tres" id="1_y6oi7"]
-[ext_resource type="StyleBox" uid="uid://c32nu0if8la1b" path="res://assets/styles/clean_pressed.tres" id="2_i3lo5"]
+[ext_resource type="StyleBox" uid="uid://coaatlbjypp87" path="res://assets/styles/hovered.tres" id="1_y6oi7"]
+[ext_resource type="StyleBox" uid="uid://c32nu0if8la1b" path="res://assets/styles/pressed.tres" id="2_i3lo5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yk4h0"]
 

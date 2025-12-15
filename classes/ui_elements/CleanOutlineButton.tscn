@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://clt0mixg6oydl"]
+
+[ext_resource type="PackedScene" uid="uid://bsulvmrttijpt" path="res://classes/ui_elements/CleanButton.tscn" id="1_dy3qe"]
+[ext_resource type="StyleBox" uid="uid://hrudqijvihgb" path="res://assets/styles/outline.tres" id="2_kv8x7"]
+
+[node name="CleanOutlineButton" instance=ExtResource("1_dy3qe")]
+theme_override_styles/normal = ExtResource("2_kv8x7")

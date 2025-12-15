@@ -36,6 +36,10 @@ func _process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
 	if not instance: return
 	
+	# Enable pass-through when dragging instance
+	var dragging = get_viewport().gui_get_drag_data()
+	mouse_filter = Control.MOUSE_FILTER_IGNORE if dragging is AppInstance else Control.MOUSE_FILTER_STOP
+	
 	# Set labels
 	label_title.text = instance.title
 	label_time.text = instance.get_time_formatted()
@@ -51,11 +55,13 @@ func _process(delta: float) -> void:
 	icon.scale = Vector2(1+hover*0.05, 1+hover*0.05)
 	icon.material.set_shader_parameter("hover", hover)
 	overlay.modulate.a = hover
+	
+	custom_minimum_size.x = 170.0 * instance.scale
 
 func _gui_input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton: return
 	if event.button_index == MOUSE_BUTTON_LEFT:
-		if event.pressed: grab_focus()
+		#if event.pressed: grab_focus()
 		if event.double_click: instance.launch()
 	elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 		open_popup()
@@ -69,7 +75,7 @@ func open_popup():
 	
 	popup.add_separator("")
 	
-	popup.add_icon_item(Global.Icons.pencil, "Rename", POPUP_ID.RENAME)
+	#popup.add_icon_item(Global.Icons.pencil, "Rename", POPUP_ID.RENAME)
 	popup.add_icon_item(Global.Icons.paint, "Set Cover", POPUP_ID.COVER)
 	
 	popup.add_separator("")
@@ -111,10 +117,19 @@ func _on_mouse_exited() -> void:
 	tween.tween_property(self, "hover", 0.0, 0.1)
 
 func _on_file_cover_file_selected(path: String) -> void:
-	instance.set_value("main", "icon", path)
+	instance.icon_path = path
+	instance.save_config()
 	update_icon = true
-	Global.save_instance(instance)
 
 func _on_popup_menu_id_pressed(id: int) -> void:
 	if id == POPUP_ID.PROPERTIES: $InstanceProperties.open(instance)
 	elif id == POPUP_ID.COVER: $FileCover.show()
+
+func _get_drag_data(at_position: Vector2) -> Variant:
+	var preview: Control = icon.duplicate()
+	for child in preview.get_children(): preview.remove_child(child)
+	preview.custom_minimum_size.x = 100
+	instance.dragged()
+	
+	set_drag_preview(preview)
+	return instance

@@ -14,7 +14,7 @@ func _update():
 	for child in categories.get_children(): child.free()
 	
 	# Create groups and add instances
-	var cache = {}
+	var cache: Dictionary = {}
 	for instance: AppInstance in Global.instances:
 		var groupname = instance.groupname
 		if groupname == "": groupname = "Unsorted"
@@ -32,6 +32,10 @@ func _update():
 	# Sort groups and add to list
 	cache.sort()
 	for group in cache.values(): categories.add_child(group)
+	
+	# Make last group expand
+	var last_group = categories.get_child(categories.get_child_count()-1)
+	if last_group: last_group.set_deferred("size_flags_vertical", Control.SIZE_EXPAND_FILL)
 
 # Signals
 func _on_add_game_pressed() -> void:

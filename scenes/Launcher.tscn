@@ -1,14 +1,14 @@
 [gd_scene load_steps=14 format=3 uid="uid://cpedyff3wu6c6"]
 
 [ext_resource type="FontFile" uid="uid://ci65yw1rvo8sy" path="res://assets/fonts/segoe/Segoe UI Semibold.ttf" id="1_nj1ld"]
-[ext_resource type="PackedScene" uid="uid://bsulvmrttijpt" path="res://classes/CleanButton.tscn" id="2_bufh5"]
+[ext_resource type="PackedScene" uid="uid://bsulvmrttijpt" path="res://classes/ui_elements/CleanButton.tscn" id="2_bufh5"]
 [ext_resource type="Script" uid="uid://bo8iv55d8kths" path="res://scenes/launcher.gd" id="2_mriyj"]
 [ext_resource type="Texture2D" uid="uid://c0g4i6wcn35c7" path="res://assets/icons/library-plus.svg" id="3_mriyj"]
 [ext_resource type="Texture2D" uid="uid://cdmsod3eykvbs" path="res://assets/icons/settings.svg" id="4_8tmsh"]
 [ext_resource type="PackedScene" uid="uid://b0r7t7r2ei5u2" path="res://classes/Category.tscn" id="5_ky0ix"]
 [ext_resource type="Script" uid="uid://bgqglerkcylxx" path="res://addons/SmoothScroll/smooth_scroll_container.gd" id="6_ky0ix"]
 [ext_resource type="Script" uid="uid://b7h0k2h2qwlqv" path="res://addons/SmoothScroll/scroll_damper/expo_scroll_damper.gd" id="8_ewsvl"]
-[ext_resource type="PackedScene" uid="uid://uv1p6o4to85b" path="res://scenes/NewInstance.tscn" id="9_ky0ix"]
+[ext_resource type="PackedScene" uid="uid://uv1p6o4to85b" path="res://scenes/panels/NewInstance.tscn" id="9_ky0ix"]
 
 [sub_resource type="Theme" id="Theme_euit1"]
 default_font = ExtResource("1_nj1ld")
@@ -95,9 +95,7 @@ size_flags_vertical = 3
 
 [node name="Category" parent="VBoxContainer/ScrollContainer/Categories" instance=ExtResource("5_ky0ix")]
 layout_mode = 2
-
-[node name="Infobar" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
+mouse_filter = 1
 
 [node name="Popup" parent="." instance=ExtResource("9_ky0ix")]
 visible = false

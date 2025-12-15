@@ -46,17 +46,18 @@ func load_instances():
 	for file in dir.get_files():
 		var path = str(dir.get_current_dir(), "/", file)
 		var instance: AppInstance = AppInstance.create_from_config(path)
-		add_instance(instance)
+		add_instance(instance, true)
+	send_update()
 
 ## Saves an instance to /instances
 func get_instance_path(instance: AppInstance):
 	return str(settings.get_value("user", "path"), "instances/", instance.identifier, ".cfg")
 
 ## Adds an instance to a list
-func add_instance(instance: AppInstance):
+func add_instance(instance: AppInstance, skip_update: bool=false):
+	if not skip_update: send_update()
 	instances.append(instance)
 	add_child(instance)
-	send_update()
 	
 ## Removes an instance from a list
 func remove_instance(instance: AppInstance):
