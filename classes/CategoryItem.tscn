@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dvc87flpy4kte"]
+[gd_scene load_steps=14 format=3 uid="uid://dvc87flpy4kte"]
 
 [ext_resource type="Script" uid="uid://lw2qnw5f5ua1" path="res://classes/category_item.gd" id="1_ovtgv"]
 [ext_resource type="Shader" uid="uid://cml2ev0fi5u5j" path="res://shaders/ItemHover.gdshader" id="2_bsg27"]
@@ -19,19 +19,6 @@ fill_to = Vector2(0, 1)
 shader = ExtResource("2_bsg27")
 shader_parameter/hover = 1.0
 shader_parameter/gradient = SubResource("GradientTexture2D_75i4n")
-
-[sub_resource type="Gradient" id="Gradient_bsg27"]
-offsets = PackedFloat32Array(0, 0.950943)
-colors = PackedColorArray(0.0846899, 0.0846899, 0.0846899, 1, 0.886262, 0.886261, 0.886262, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_dx0u5"]
-gradient = SubResource("Gradient_bsg27")
-fill_to = Vector2(0, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bsg27"]
-shader = ExtResource("2_bsg27")
-shader_parameter/hover = 0.0
-shader_parameter/gradient = SubResource("GradientTexture2D_dx0u5")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dx0u5"]
 content_margin_left = 4.0
@@ -83,8 +70,8 @@ overlay = NodePath("Icon/Overlay")
 metadata/_edit_use_anchors_ = true
 
 [node name="Icon" type="TextureRect" parent="."]
-material = SubResource("ShaderMaterial_bsg27")
 layout_mode = 2
+size_flags_vertical = 4
 mouse_filter = 2
 texture = ExtResource("2_dx0u5")
 expand_mode = 5
@@ -92,9 +79,10 @@ stretch_mode = 5
 metadata/_edit_use_anchors_ = true
 
 [node name="Overlay" type="PanelContainer" parent="Icon"]
-layout_mode = 2
-offset_right = 170.0
-offset_bottom = 255.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2

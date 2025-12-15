@@ -226,7 +226,7 @@ icon = ExtResource("7_5mxr0")
 
 [node name="Cancel" parent="VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource("6_dnlbg")]
 layout_mode = 2
-text = "Cancel"
+text = "Close"
 icon = ExtResource("8_gvl1e")
 
 [node name="Playtime" type="Label" parent="VBoxContainer/PanelContainer"]

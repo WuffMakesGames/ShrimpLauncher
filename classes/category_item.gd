@@ -55,13 +55,10 @@ func _process(delta: float) -> void:
 	icon.scale = Vector2(1+hover*0.05, 1+hover*0.05)
 	icon.material.set_shader_parameter("hover", hover)
 	overlay.modulate.a = hover
-	
-	custom_minimum_size.x = 170.0 * instance.scale
 
 func _gui_input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton: return
 	if event.button_index == MOUSE_BUTTON_LEFT:
-		#if event.pressed: grab_focus()
 		if event.double_click: instance.launch()
 	elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 		open_popup()
