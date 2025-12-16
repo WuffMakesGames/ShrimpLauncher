@@ -1,17 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://d2cvamdxuxanr"]
+[gd_scene load_steps=12 format=3 uid="uid://d2cvamdxuxanr"]
 
-[ext_resource type="FontFile" uid="uid://dyjx5ew3ptgpn" path="res://assets/fonts/segoe/Segoe UI.ttf" id="1_ol5x6"]
+[ext_resource type="Theme" uid="uid://q6urdlhd8fm1" path="res://assets/themes/default_dark.tres" id="1_ol5x6"]
 [ext_resource type="Script" uid="uid://cdejifc82tt3l" path="res://scenes/panels/instance_properties.gd" id="2_gx8uw"]
-[ext_resource type="PackedScene" uid="uid://jqc6juhxwjlo" path="res://classes/ui_elements/CleanLineEdit.tscn" id="3_jegt5"]
-[ext_resource type="PackedScene" uid="uid://lkswx4kktywo" path="res://classes/ui_elements/CleanTextEdit.tscn" id="4_dnlbg"]
-[ext_resource type="LabelSettings" uid="uid://cpuc6l08b55gs" path="res://assets/styles/label_dim.tres" id="5_5mxr0"]
-[ext_resource type="PackedScene" uid="uid://clt0mixg6oydl" path="res://classes/ui_elements/CleanOutlineButton.tscn" id="6_dnlbg"]
 [ext_resource type="Texture2D" uid="uid://dq2wxxbqyir8w" path="res://assets/icons/check.svg" id="7_5mxr0"]
 [ext_resource type="Texture2D" uid="uid://cuekvs4wik6np" path="res://assets/icons/cancel.svg" id="8_gvl1e"]
-
-[sub_resource type="Theme" id="Theme_dufkc"]
-default_font = ExtResource("1_ol5x6")
-default_font_size = 13
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ew66b"]
 
@@ -57,16 +49,11 @@ content_margin_top = 4.0
 content_margin_right = 4.0
 content_margin_bottom = 4.0
 
-[node name="InstanceProperties" type="Window" node_paths=PackedStringArray("edit_title", "edit_group", "edit_notes", "edit_program", "edit_args", "playtime")]
+[node name="InstanceProperties" type="Window" node_paths=PackedStringArray("playtime")]
 initial_position = 2
 size = Vector2i(600, 400)
-theme = SubResource("Theme_dufkc")
+theme = ExtResource("1_ol5x6")
 script = ExtResource("2_gx8uw")
-edit_title = NodePath("VBoxContainer/TabContainer/General/VBoxContainer/Title/CleanLineEdit")
-edit_group = NodePath("VBoxContainer/TabContainer/General/VBoxContainer/Group/CleanLineEdit")
-edit_notes = NodePath("VBoxContainer/TabContainer/General/VBoxContainer/Notes/CleanTextEdit")
-edit_program = NodePath("VBoxContainer/TabContainer/Application/VBoxContainer/Program/CleanLineEdit")
-edit_args = NodePath("VBoxContainer/TabContainer/Application/VBoxContainer/Arguments/CleanLineEdit")
 playtime = NodePath("VBoxContainer/PanelContainer/Playtime")
 
 [node name="Background" type="ColorRect" parent="."]
@@ -117,9 +104,12 @@ layout_mode = 2
 size_flags_horizontal = 8
 text = "Title:"
 
-[node name="CleanLineEdit" parent="VBoxContainer/TabContainer/General/VBoxContainer/Title" instance=ExtResource("3_jegt5")]
+[node name="InputTitle" type="LineEdit" parent="VBoxContainer/TabContainer/General/VBoxContainer/Title"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+context_menu_enabled = false
+caret_blink = true
 
 [node name="Group" type="HBoxContainer" parent="VBoxContainer/TabContainer/General/VBoxContainer"]
 layout_mode = 2
@@ -132,9 +122,12 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Group:"
 
-[node name="CleanLineEdit" parent="VBoxContainer/TabContainer/General/VBoxContainer/Group" instance=ExtResource("3_jegt5")]
+[node name="InputGroupname" type="LineEdit" parent="VBoxContainer/TabContainer/General/VBoxContainer/Group"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+context_menu_enabled = false
+caret_blink = true
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/TabContainer/General/VBoxContainer"]
 layout_mode = 2
@@ -151,8 +144,12 @@ size_flags_vertical = 0
 text = "Notes:"
 horizontal_alignment = 1
 
-[node name="CleanTextEdit" parent="VBoxContainer/TabContainer/General/VBoxContainer/Notes" instance=ExtResource("4_dnlbg")]
+[node name="InputNotes" type="TextEdit" parent="VBoxContainer/TabContainer/General/VBoxContainer/Notes"]
+unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 3
+context_menu_enabled = false
+caret_blink = true
 
 [node name="Application" type="PanelContainer" parent="VBoxContainer/TabContainer"]
 visible = false
@@ -175,9 +172,12 @@ layout_mode = 2
 size_flags_horizontal = 8
 text = "Program:"
 
-[node name="CleanLineEdit" parent="VBoxContainer/TabContainer/Application/VBoxContainer/Program" instance=ExtResource("3_jegt5")]
+[node name="InputProgram" type="LineEdit" parent="VBoxContainer/TabContainer/Application/VBoxContainer/Program"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+context_menu_enabled = false
+caret_blink = true
 
 [node name="Arguments" type="HBoxContainer" parent="VBoxContainer/TabContainer/Application/VBoxContainer"]
 layout_mode = 2
@@ -190,22 +190,67 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Arguments:"
 
-[node name="CleanLineEdit" parent="VBoxContainer/TabContainer/Application/VBoxContainer/Arguments" instance=ExtResource("3_jegt5")]
+[node name="InputArguments" type="LineEdit" parent="VBoxContainer/TabContainer/Application/VBoxContainer/Arguments"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+context_menu_enabled = false
+caret_blink = true
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/TabContainer/Application/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_ew66b")
 
 [node name="Label" type="Label" parent="VBoxContainer/TabContainer/Application/VBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 6
+theme_type_variation = &"InfoLabel"
 text = "Arguments should be separated by commas, and formatted like so:
 -launch,File Name,-color,red"
-label_settings = ExtResource("5_5mxr0")
 horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Steam" type="PanelContainer" parent="VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dufkc")
+metadata/_tab_index = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Steam"]
+layout_mode = 2
+
+[node name="AppID" type="HBoxContainer" parent="VBoxContainer/TabContainer/Steam/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Steam/VBoxContainer/AppID"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "App ID:"
+
+[node name="InputSteamAppID" type="LineEdit" parent="VBoxContainer/TabContainer/Steam/VBoxContainer/AppID"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+context_menu_enabled = false
+caret_blink = true
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/TabContainer/Steam/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_ew66b")
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Steam/VBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme_type_variation = &"InfoLabel"
+text = "The App ID can be found in Steam by right clicking on a game and checking properties/updates."
+horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 24)
@@ -219,21 +264,23 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 
-[node name="Apply" parent="VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource("6_dnlbg")]
+[node name="Apply" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
+theme_type_variation = &"ConfirmAppButton"
 text = "Apply"
 icon = ExtResource("7_5mxr0")
 
-[node name="Cancel" parent="VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource("6_dnlbg")]
+[node name="Cancel" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
+theme_type_variation = &"AppButton"
 text = "Close"
 icon = ExtResource("8_gvl1e")
 
 [node name="Playtime" type="Label" parent="VBoxContainer/PanelContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
+theme_type_variation = &"InfoLabel"
 text = "Time Played: 0 min - Launched 0 times"
-label_settings = ExtResource("5_5mxr0")
 
 [connection signal="close_requested" from="." to="." method="_on_close_requested"]
 [connection signal="tab_changed" from="VBoxContainer/TabContainer" to="." method="_on_tab_container_tab_changed"]

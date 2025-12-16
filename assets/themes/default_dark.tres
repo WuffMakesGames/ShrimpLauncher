@@ -1,0 +1,57 @@
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://q6urdlhd8fm1"]
+
+[ext_resource type="FontFile" uid="uid://ci65yw1rvo8sy" path="res://assets/fonts/segoe/Segoe UI Semibold.ttf" id="1_thr7l"]
+[ext_resource type="StyleBox" uid="uid://1kfmwwiyxlim" path="res://assets/styles/outline_focused.tres" id="1_tq4lc"]
+[ext_resource type="StyleBox" uid="uid://coaatlbjypp87" path="res://assets/styles/hovered.tres" id="1_x0nhu"]
+[ext_resource type="StyleBox" uid="uid://hrudqijvihgb" path="res://assets/styles/outline.tres" id="2_4bvjd"]
+[ext_resource type="StyleBox" uid="uid://c32nu0if8la1b" path="res://assets/styles/pressed.tres" id="2_dklf7"]
+[ext_resource type="FontFile" uid="uid://dyjx5ew3ptgpn" path="res://assets/fonts/segoe/Segoe UI.ttf" id="5_tq4lc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yk4h0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y6oi7"]
+content_margin_left = 8.0
+content_margin_top = 2.0
+content_margin_right = 8.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4bvjd"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.49, 0.7705, 1, 0.388235)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.564706, 0.792157, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[resource]
+default_font = ExtResource("5_tq4lc")
+default_font_size = 13
+AppButton/base_type = &"Button"
+AppButton/styles/normal = ExtResource("2_4bvjd")
+Button/colors/font_pressed_color = Color(0.529412, 0.529412, 0.529412, 1)
+Button/colors/icon_pressed_color = Color(0.529412, 0.529412, 0.529412, 1)
+Button/fonts/font = ExtResource("1_thr7l")
+Button/styles/focus = SubResource("StyleBoxEmpty_yk4h0")
+Button/styles/hover = ExtResource("1_x0nhu")
+Button/styles/normal = SubResource("StyleBoxEmpty_y6oi7")
+Button/styles/pressed = ExtResource("2_dklf7")
+ConfirmAppButton/base_type = &"AppButton"
+ConfirmAppButton/colors/font_color = Color(0.565778, 0.791768, 1, 1)
+ConfirmAppButton/colors/icon_normal_color = Color(0.564706, 0.792157, 1, 1)
+ConfirmAppButton/styles/normal = SubResource("StyleBoxFlat_4bvjd")
+GridLabel/base_type = &"Label"
+GridLabel/fonts/font = ExtResource("1_thr7l")
+InfoLabel/base_type = &"Label"
+InfoLabel/colors/font_color = Color(0.607843, 0.607843, 0.607843, 1)
+LineEdit/styles/focus = ExtResource("1_tq4lc")
+LineEdit/styles/normal = ExtResource("2_4bvjd")
+TextEdit/styles/focus = ExtResource("1_tq4lc")
+TextEdit/styles/normal = ExtResource("2_4bvjd")

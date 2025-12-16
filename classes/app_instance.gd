@@ -16,6 +16,8 @@ var args: String = ""
 
 # Variables
 var texture: Texture2D
+var default_texture: Texture2D = preload("res://assets/images/default.png")
+
 var was_running: bool = false
 var save_timer: float = 30
 var proc_id: int
@@ -87,7 +89,7 @@ func is_running() -> bool:
 #region Methods
 func fetch_texture() -> Texture2D:
 	var texture_loaded = Loader.load(icon_path)
-	if texture_loaded is Texture2D: texture = texture_loaded
+	texture = texture_loaded if texture_loaded is Texture2D else default_texture
 	return texture
 
 func get_time_formatted() -> String:

@@ -45,5 +45,6 @@ func _on_add_game_pressed() -> void:
 
 func _on_native_file_dialog_file_selected(path: String) -> void:
 	var title = path.get_slice("/", path.get_slice_count("/")-1).get_basename()
-	var instance = Global.new_instance(title, path, "", "")
+	var instance = AppInstance.new(title, "", "", path)
 	Global.add_instance(instance)
+	instance.save_config()

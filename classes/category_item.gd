@@ -1,4 +1,4 @@
-extends PanelContainer
+extends Container
 
 enum POPUP_ID {
 	RENAME=0, COVER=1,
@@ -9,8 +9,8 @@ enum POPUP_ID {
 
 # Export
 @export var icon_material: ShaderMaterial
-@export var label_title: RichTextLabel
-@export var label_time: RichTextLabel
+@export var label_title: Label
+@export var label_time: Label
 @export var overlay: PanelContainer
 
 # Variables
@@ -19,6 +19,8 @@ enum POPUP_ID {
 @onready var icon: TextureRect = $Icon
 
 var hover: float = 0.0
+var border_active: bool = false
+
 var tween: Tween
 var instance: AppInstance
 var update_icon: bool = true
@@ -31,6 +33,8 @@ func _ready() -> void:
 	# Signals
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
+	focus_entered.connect(_on_mouse_entered)
+	focus_exited.connect(_on_mouse_exited)
 
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
@@ -51,17 +55,29 @@ func _process(delta: float) -> void:
 	icon.texture = instance.texture
 	
 	# Animate item
-	icon.pivot_offset = icon.size/2
+	icon.pivot_offset = icon.size / 2.0
 	icon.scale = Vector2(1+hover*0.05, 1+hover*0.05)
 	icon.material.set_shader_parameter("hover", hover)
 	overlay.modulate.a = hover
+	
+	# Animate border
+	%Border.modulate = Color(0.157, 0.592, 1.0).lerp(Color(0.616, 0.797, 1.0), 0.5 + sin(Time.get_ticks_msec()/200.0)*0.5)
+	%Border.visible = border_active
 
 func _gui_input(event: InputEvent) -> void:
-	if not event is InputEventMouseButton: return
-	if event.button_index == MOUSE_BUTTON_LEFT:
-		if event.double_click: instance.launch()
-	elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-		open_popup()
+	if event is InputEventMouse: border_active = false
+	else: border_active = true
+	
+	# Mouse buttons
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.double_click: instance.launch()
+		elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+			open_popup()
+	
+	# Inputs
+	if event.is_action_pressed("ui_accept"):
+		instance.launch()
 
 # Methods
 func open_popup():

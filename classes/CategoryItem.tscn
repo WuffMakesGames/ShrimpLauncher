@@ -1,9 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://dvc87flpy4kte"]
+[gd_scene load_steps=17 format=3 uid="uid://dvc87flpy4kte"]
 
+[ext_resource type="Theme" uid="uid://q6urdlhd8fm1" path="res://assets/themes/default_dark.tres" id="1_7wmau"]
 [ext_resource type="Script" uid="uid://lw2qnw5f5ua1" path="res://classes/category_item.gd" id="1_ovtgv"]
 [ext_resource type="Shader" uid="uid://cml2ev0fi5u5j" path="res://shaders/ItemHover.gdshader" id="2_bsg27"]
 [ext_resource type="Texture2D" uid="uid://ci1ifdfhrndd4" path="res://assets/images/default.png" id="2_dx0u5"]
 [ext_resource type="FontFile" uid="uid://dyjx5ew3ptgpn" path="res://assets/fonts/segoe/Segoe UI.ttf" id="4_mnvh7"]
+[ext_resource type="StyleBox" uid="uid://7odinthfaiue" path="res://assets/styles/item_hover_border.tres" id="4_opu10"]
 [ext_resource type="PackedScene" uid="uid://d2cvamdxuxanr" path="res://scenes/panels/InstanceProperties.tscn" id="5_75i4n"]
 
 [sub_resource type="Gradient" id="Gradient_dx0u5"]
@@ -25,6 +27,8 @@ content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
 content_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7wmau"]
 
 [sub_resource type="Theme" id="Theme_orjtu"]
 default_font = ExtResource("4_mnvh7")
@@ -56,18 +60,20 @@ color = Color(0.18359, 0.18359, 0.18359, 1)
 grow_begin = -4.0
 grow_end = -4.0
 
-[node name="CategoryItem" type="PanelContainer" node_paths=PackedStringArray("label_title", "label_time", "overlay")]
+[node name="CategoryItem" type="MarginContainer" node_paths=PackedStringArray("label_title", "label_time", "overlay")]
 custom_minimum_size = Vector2(170, 0)
 anchors_preset = -1
 anchor_right = 0.176166
 anchor_bottom = 0.364286
+grow_horizontal = 2
+grow_vertical = 2
 focus_mode = 2
+theme = ExtResource("1_7wmau")
 script = ExtResource("1_ovtgv")
 icon_material = SubResource("ShaderMaterial_dx0u5")
 label_title = NodePath("Icon/Overlay/HBoxContainer/Title")
 label_time = NodePath("Icon/Overlay/HBoxContainer/Playtime")
 overlay = NodePath("Icon/Overlay")
-metadata/_edit_use_anchors_ = true
 
 [node name="Icon" type="TextureRect" parent="."]
 layout_mode = 2
@@ -88,27 +94,37 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_dx0u5")
 
+[node name="Border" type="Panel" parent="Icon/Overlay"]
+unique_name_in_owner = true
+z_index = -1
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("4_opu10")
+
 [node name="HBoxContainer" type="HBoxContainer" parent="Icon/Overlay"]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="Title" type="RichTextLabel" parent="Icon/Overlay/HBoxContainer"]
+[node name="Title" type="Label" parent="Icon/Overlay/HBoxContainer"]
+custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-mouse_filter = 2
+theme_type_variation = &"GridLabel"
 text = "Title"
-fit_content = true
-scroll_active = false
+autowrap_mode = 2
 
-[node name="Playtime" type="RichTextLabel" parent="Icon/Overlay/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="Icon/Overlay/HBoxContainer"]
 layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_7wmau")
+
+[node name="Playtime" type="Label" parent="Icon/Overlay/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
 size_flags_vertical = 8
-mouse_filter = 2
+theme_type_variation = &"GridLabel"
 text = "Playtime"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
+horizontal_alignment = 2
 
 [node name="FileCover" type="NativeFileDialog" parent="."]
 title = "Open a File"
