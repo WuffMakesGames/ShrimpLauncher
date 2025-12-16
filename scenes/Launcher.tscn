@@ -1,11 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://cpedyff3wu6c6"]
+[gd_scene load_steps=15 format=3 uid="uid://cpedyff3wu6c6"]
 
 [ext_resource type="Theme" uid="uid://q6urdlhd8fm1" path="res://assets/themes/default_dark.tres" id="1_8tmsh"]
 [ext_resource type="Script" uid="uid://bo8iv55d8kths" path="res://scenes/launcher.gd" id="2_mriyj"]
 [ext_resource type="Texture2D" uid="uid://c0g4i6wcn35c7" path="res://assets/icons/library-plus.svg" id="3_mriyj"]
 [ext_resource type="Texture2D" uid="uid://cdmsod3eykvbs" path="res://assets/icons/settings.svg" id="4_8tmsh"]
-[ext_resource type="PackedScene" uid="uid://b0r7t7r2ei5u2" path="res://classes/Category.tscn" id="5_ky0ix"]
+[ext_resource type="PackedScene" uid="uid://b0r7t7r2ei5u2" path="res://classes/ui_elements/Category.tscn" id="5_ky0ix"]
 [ext_resource type="Script" uid="uid://bgqglerkcylxx" path="res://addons/SmoothScroll/smooth_scroll_container.gd" id="6_ky0ix"]
+[ext_resource type="PackedScene" uid="uid://cmh7mq83127d3" path="res://classes/ui_elements/Achievement.tscn" id="8_8tmsh"]
 [ext_resource type="Script" uid="uid://b7h0k2h2qwlqv" path="res://addons/SmoothScroll/scroll_damper/expo_scroll_damper.gd" id="8_ewsvl"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o7xn7"]
@@ -27,6 +28,24 @@ friction = 4.0
 minimum_velocity = 0.4
 rebound_strength = 7.0
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8tmsh"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+
+[sub_resource type="Resource" id="Resource_mriyj"]
+script = ExtResource("8_ewsvl")
+friction = 4.0
+minimum_velocity = 0.4
+rebound_strength = 7.0
+
+[sub_resource type="Resource" id="Resource_ky0ix"]
+script = ExtResource("8_ewsvl")
+friction = 4.0
+minimum_velocity = 0.4
+rebound_strength = 7.0
+
 [node name="Launcher" type="Control" node_paths=PackedStringArray("categories")]
 texture_filter = 2
 layout_mode = 3
@@ -37,7 +56,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_8tmsh")
 script = ExtResource("2_mriyj")
-categories = NodePath("VBoxContainer/ScrollContainer/Categories")
+categories = NodePath("Main/ScrollContainer/Categories")
 
 [node name="Background" type="ColorRect" parent="."]
 z_index = -1000
@@ -49,7 +68,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.1, 0.1, 0.1, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Main" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,22 +76,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Menubar" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Menubar" type="HBoxContainer" parent="Main"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="AddGame" type="Button" parent="VBoxContainer/Menubar"]
+[node name="AddGame" type="Button" parent="Main/Menubar"]
 layout_mode = 2
 text = "Add Game"
 icon = ExtResource("3_mriyj")
 
-[node name="Settings" type="Button" parent="VBoxContainer/Menubar"]
+[node name="Settings" type="Button" parent="Main/Menubar"]
 layout_mode = 2
 text = "Settings
 "
 icon = ExtResource("4_8tmsh")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Main"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_o7xn7")
@@ -83,12 +102,118 @@ dragging_scroll_damper = SubResource("Resource_4nsu7")
 allow_horizontal_scroll = false
 metadata/_custom_type_script = "uid://bgqglerkcylxx"
 
-[node name="Categories" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+[node name="Categories" type="VBoxContainer" parent="Main/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Category" parent="VBoxContainer/ScrollContainer/Categories" instance=ExtResource("5_ky0ix")]
+[node name="Category" parent="Main/ScrollContainer/Categories" instance=ExtResource("5_ky0ix")]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Modal" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="Modal"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.388235)
+
+[node name="Achievements" type="PanelContainer" parent="Modal"]
+layout_mode = 2
+anchor_left = 0.129534
+anchor_top = 0.135714
+anchor_right = 0.870466
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"BackgroundPanel"
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Modal/Achievements"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Modal/Achievements/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+
+[node name="SmoothScrollContainer" type="ScrollContainer" parent="Modal/Achievements/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_8tmsh")
+script = ExtResource("6_ky0ix")
+wheel_scroll_damper = SubResource("Resource_mriyj")
+dragging_scroll_damper = SubResource("Resource_ky0ix")
+metadata/_custom_type_script = "uid://bgqglerkcylxx"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Modal/Achievements/VBoxContainer/SmoothScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Achievement" parent="Modal/Achievements/VBoxContainer/SmoothScrollContainer/VBoxContainer" instance=ExtResource("8_8tmsh")]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Achievement2" parent="Modal/Achievements/VBoxContainer/SmoothScrollContainer/VBoxContainer" instance=ExtResource("8_8tmsh")]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Achievement3" parent="Modal/Achievements/VBoxContainer/SmoothScrollContainer/VBoxContainer" instance=ExtResource("8_8tmsh")]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Achievement4" parent="Modal/Achievements/VBoxContainer/SmoothScrollContainer/VBoxContainer" instance=ExtResource("8_8tmsh")]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Achievement5" parent="Modal/Achievements/VBoxContainer/SmoothScrollContainer/VBoxContainer" instance=ExtResource("8_8tmsh")]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Achievement6" parent="Modal/Achievements/VBoxContainer/SmoothScrollContainer/VBoxContainer" instance=ExtResource("8_8tmsh")]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Achievement7" parent="Modal/Achievements/VBoxContainer/SmoothScrollContainer/VBoxContainer" instance=ExtResource("8_8tmsh")]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Achievement8" parent="Modal/Achievements/VBoxContainer/SmoothScrollContainer/VBoxContainer" instance=ExtResource("8_8tmsh")]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Achievement9" parent="Modal/Achievements/VBoxContainer/SmoothScrollContainer/VBoxContainer" instance=ExtResource("8_8tmsh")]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Achievement10" parent="Modal/Achievements/VBoxContainer/SmoothScrollContainer/VBoxContainer" instance=ExtResource("8_8tmsh")]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Achievement11" parent="Modal/Achievements/VBoxContainer/SmoothScrollContainer/VBoxContainer" instance=ExtResource("8_8tmsh")]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Achievement12" parent="Modal/Achievements/VBoxContainer/SmoothScrollContainer/VBoxContainer" instance=ExtResource("8_8tmsh")]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Achievement13" parent="Modal/Achievements/VBoxContainer/SmoothScrollContainer/VBoxContainer" instance=ExtResource("8_8tmsh")]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Achievement14" parent="Modal/Achievements/VBoxContainer/SmoothScrollContainer/VBoxContainer" instance=ExtResource("8_8tmsh")]
 layout_mode = 2
 mouse_filter = 1
 
@@ -97,5 +222,5 @@ mode_overrides_title = false
 file_mode = 0
 access = 2
 
-[connection signal="pressed" from="VBoxContainer/Menubar/AddGame" to="." method="_on_add_game_pressed"]
+[connection signal="pressed" from="Main/Menubar/AddGame" to="." method="_on_add_game_pressed"]
 [connection signal="file_selected" from="NativeFileDialog" to="." method="_on_native_file_dialog_file_selected"]

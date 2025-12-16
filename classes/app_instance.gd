@@ -16,7 +16,7 @@ var args: String = ""
 
 # Variables
 var texture: Texture2D
-var default_texture: Texture2D = preload("res://assets/images/default.png")
+var default_texture: Texture2D = preload("res://assets/images/default_grid.png")
 
 var was_running: bool = false
 var save_timer: float = 30

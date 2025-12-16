@@ -4,7 +4,7 @@ extends Control
 @export var categories: Control
 
 # Variables
-@onready var category_node: PackedScene = preload("res://classes/Category.tscn") 
+@onready var category_node: PackedScene = preload("res://classes/ui_elements/Category.tscn") 
 
 # Methods
 func _ready() -> void:

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=10 format=3 uid="uid://q6urdlhd8fm1"]
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://q6urdlhd8fm1"]
 
 [ext_resource type="FontFile" uid="uid://ci65yw1rvo8sy" path="res://assets/fonts/segoe/Segoe UI Semibold.ttf" id="1_thr7l"]
 [ext_resource type="StyleBox" uid="uid://1kfmwwiyxlim" path="res://assets/styles/outline_focused.tres" id="1_tq4lc"]
@@ -6,6 +6,16 @@
 [ext_resource type="StyleBox" uid="uid://hrudqijvihgb" path="res://assets/styles/outline.tres" id="2_4bvjd"]
 [ext_resource type="StyleBox" uid="uid://c32nu0if8la1b" path="res://assets/styles/pressed.tres" id="2_dklf7"]
 [ext_resource type="FontFile" uid="uid://dyjx5ew3ptgpn" path="res://assets/fonts/segoe/Segoe UI.ttf" id="5_tq4lc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gdfqk"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.184, 0.192267, 0.2, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pugdu"]
+bg_color = Color(0.101961, 0.101961, 0.101961, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yk4h0"]
 
@@ -34,8 +44,12 @@ corner_radius_bottom_left = 4
 [resource]
 default_font = ExtResource("5_tq4lc")
 default_font_size = 13
+AchievementPanel/base_type = &"Panel"
+AchievementPanel/styles/panel = SubResource("StyleBoxFlat_gdfqk")
 AppButton/base_type = &"Button"
 AppButton/styles/normal = ExtResource("2_4bvjd")
+BackgroundPanel/base_type = &"Panel"
+BackgroundPanel/styles/panel = SubResource("StyleBoxFlat_pugdu")
 Button/colors/font_pressed_color = Color(0.529412, 0.529412, 0.529412, 1)
 Button/colors/icon_pressed_color = Color(0.529412, 0.529412, 0.529412, 1)
 Button/fonts/font = ExtResource("1_thr7l")
@@ -49,6 +63,8 @@ ConfirmAppButton/colors/icon_normal_color = Color(0.564706, 0.792157, 1, 1)
 ConfirmAppButton/styles/normal = SubResource("StyleBoxFlat_4bvjd")
 GridLabel/base_type = &"Label"
 GridLabel/fonts/font = ExtResource("1_thr7l")
+HeaderLarge/font_sizes/font_size = 16
+HeaderLarge/fonts/font = ExtResource("1_thr7l")
 InfoLabel/base_type = &"Label"
 InfoLabel/colors/font_color = Color(0.607843, 0.607843, 0.607843, 1)
 LineEdit/styles/focus = ExtResource("1_tq4lc")

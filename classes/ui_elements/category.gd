@@ -3,7 +3,7 @@ extends VBoxContainer
 # Variables
 @onready var panel: PanelContainer = $PanelContainer
 @onready var list: HFlowContainer = $PanelContainer/Items
-@onready var instance_node: PackedScene = preload("res://classes/CategoryItem.tscn")
+@onready var instance_node: PackedScene = preload("res://classes/ui_elements/CategoryItem.tscn")
 
 # Process
 func _process(delta: float) -> void:
