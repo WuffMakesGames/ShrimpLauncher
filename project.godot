@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Shrimp Launcher"
 run/main_scene="uid://cpedyff3wu6c6"
-config/features=PackedStringArray("4.4", "GL Compatibility")
+config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="uid://c8jiklvx6eb3p"
 config/windows_native_icon="res://assets/images/shrimp.ico"
 

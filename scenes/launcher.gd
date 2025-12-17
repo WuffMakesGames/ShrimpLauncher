@@ -5,10 +5,15 @@ extends Control
 
 # Variables
 @onready var category_node: PackedScene = preload("res://classes/ui_elements/Category.tscn") 
+var last_focused: Control
 
 # Methods
 func _ready() -> void:
 	Global.updated.connect(_update)
+	
+	var window = get_window()
+	window.focus_entered.connect(_on_focus_entered)
+	window.focus_exited.connect(_on_focus_lost)
 
 func _update():
 	for child in categories.get_children(): child.free()
@@ -48,3 +53,10 @@ func _on_native_file_dialog_file_selected(path: String) -> void:
 	var instance = AppInstance.new(title, "", "", path)
 	Global.add_instance(instance)
 	instance.save_config()
+
+func _on_focus_lost() -> void:
+	last_focused = get_viewport().gui_get_focus_owner()
+	get_viewport().gui_release_focus()
+
+func _on_focus_entered() -> void:
+	if last_focused: last_focused.grab_focus()
